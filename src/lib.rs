@@ -18,7 +18,7 @@ const STARDUST_LEVEL_LOOKUP: &'static [(u32, &'static [f32])] = &[
     (7_000, &[33.0, 33.5, 34.0, 34.5]),
     (8_000, &[35.0, 35.5, 36.0, 36.5]),
     (9_000, &[37.0, 37.5, 38.0, 38.5]),
-    (10_000, &[39.0]),
+    (10_000, &[39.0, 39.5, 40.0]),
 ];
 
 /// Given the stardust cost to power up a Pokemon, return the possible values for that Pokemon's
@@ -35,6 +35,8 @@ const STARDUST_LEVEL_LOOKUP: &'static [(u32, &'static [f32])] = &[
 ///
 /// assert_eq!(Some(possible_pokemon_levels), possible_levels(powerup_cost));
 /// ```
+///
+/// The highest possible value returned by this function is `40.0`.
 pub fn possible_levels(cost_to_powerup: u32) -> Option<&'static [f32]> {
     STARDUST_LEVEL_LOOKUP
         .iter()
@@ -62,7 +64,7 @@ mod tests {
         assert_eq!(Some(levels), possible_levels(cost));
 
         let cost = 10_000;
-        let levels: &[f32] = &[39.0];
+        let levels: &[f32] = &[39.0, 39.5, 40.0];
         assert_eq!(Some(levels), possible_levels(cost));
 
         let cost = 0;
