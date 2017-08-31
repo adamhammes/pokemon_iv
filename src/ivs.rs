@@ -48,10 +48,14 @@ mod ivs {
     impl TopStat {
         pub fn new(attack: bool, defense: bool, stamina: bool) -> Option<TopStat> {
             if !(attack || defense || stamina) {
-                return None
+                return None;
             }
 
-            Some(TopStat { attack, defense, stamina })
+            Some(TopStat {
+                attack,
+                defense,
+                stamina,
+            })
         }
 
         pub fn attack_hi(&self) -> bool {
@@ -79,12 +83,20 @@ mod ivs {
     pub struct PokeEvaluation {
         overall: OverallAppraisal,
         stat_range: StatRange,
-        top_stat: TopStat
+        top_stat: TopStat,
     }
 
     impl PokeEvaluation {
-        pub fn new(overall: OverallAppraisal, stat_range: StatRange, top_stat: TopStat) -> PokeEvaluation {
-            PokeEvaluation { overall, stat_range, top_stat }
+        pub fn new(
+            overall: OverallAppraisal,
+            stat_range: StatRange,
+            top_stat: TopStat,
+        ) -> PokeEvaluation {
+            PokeEvaluation {
+                overall,
+                stat_range,
+                top_stat,
+            }
         }
 
         pub fn overall(&self) -> OverallAppraisal {
@@ -111,9 +123,9 @@ mod ivs {
         pub fn new(attack: u8, defense: u8, stamina: u8) -> Option<IndividualValue> {
             if !IndividualValue::valid_stat(attack) || !IndividualValue::valid_stat(defense) ||
                 !IndividualValue::valid_stat(stamina)
-                {
-                    return None;
-                }
+            {
+                return None;
+            }
 
             Some(IndividualValue {
                 attack,
@@ -151,9 +163,11 @@ mod ivs {
         pub fn top_stat(&self) -> TopStat {
             let highest_stat = self.highest_stat_value();
 
-            TopStat::new(self.attack() == highest_stat,
-                         self.defense() == highest_stat,
-                         self.stamina()== highest_stat).unwrap()
+            TopStat::new(
+                self.attack() == highest_stat,
+                self.defense() == highest_stat,
+                self.stamina() == highest_stat,
+            ).unwrap()
         }
 
         pub fn as_tuple(&self) -> (u8, u8, u8) {
@@ -227,7 +241,7 @@ mod tests {
     }
 
     #[test]
-    fn iv_new () {
+    fn iv_new() {
         assert!(IndividualValue::new(0, 0, 0).is_some());
         assert!(IndividualValue::new(15, 15, 15).is_some());
 
