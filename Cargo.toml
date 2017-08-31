@@ -3,4 +3,11 @@ name = "pokemon_iv"
 version = "0.1.0"
 authors = ["Adam Hammes <adam@hammes.io>"]
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "ivcalc"
+path = "src/cli.rs"
+
 [dependencies]
